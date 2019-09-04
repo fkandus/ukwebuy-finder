@@ -7,7 +7,11 @@ How to run:
 
 This will write to a file `trade-games-YYYYMMDD-HHMMSS` and to command line.
 
-Output Example
+## Input File
+
+CSV of Game ID,"buy" or "sell" action. See `short-game-ids.txt`. 
+
+## Output Example
 
 ```
 -------------------------------------------------------
@@ -19,3 +23,4 @@ Red Dead Redemption 2 (2 Disc) (No DLC)
     Glasgow Forge: 4+
 =======================================================
 ```
+
