@@ -22,5 +22,8 @@ Red Dead Redemption 2 (2 Disc) (No DLC)
     Glasgow Sauchiehall: 4+
     Glasgow Forge: 4+
 =======================================================
+Uncharted: Golden Abyss
+    Exchange Price: 10.00
+=======================================================
 ```
 
