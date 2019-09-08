@@ -5,17 +5,18 @@ Queries [CeX](https://uk.webuy.com/) to find out availability and prices of game
 1. Execute `go build finder.go ukwebuy.go location.go configuration.go`.
 2. Rename `config.json.example` to `config.json`.
 3. Set the values in `config.json` according to your own setup (Check the [Config file](#config-file) section).
-4. Create an input file (Check the [Config file](#config-file) section). Name it `input-file.txt`.
+4. Create an input file (Check the [Input file](#input-file) section). Name it, for example, `input-file.txt`.
 5. Execute `finder input-file.txt`
 
 This will write to a file `trade-games-YYYYMMDD-HHMMSS.txt` and to command line.
 
 ## Input File
 
-CSV of Game ID,"buy" or "sell" action. See `short-game-ids.txt`.
+CSV of GameID,Action. See `short-game-ids.txt`.
 
-To get the Game ID go to the URL of a game or product and look for the `id` parameter.
+To get the Game ID go to the URL of a game and look for the `id` parameter.
 For example, in `https://uk.webuy.com/product-detail?id=5026555423045&categoryName=playstation4-software&superCatName=gaming&title=red-dead-redemption-2-%282-disc%29-%28no-dlc%29` the Game ID is `5026555423045`.
+Action is `buy` or `sell`.
 
 ## Config File
 
