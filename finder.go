@@ -16,6 +16,15 @@ func main() {
 		return
 	}
 
+	var config = getConfig()
+
+	var locations = getLocations(config)
+
+	if len(locations) == 0 {
+		fmt.Println("No locations found for the current config.")
+		return
+	}
+
 	input, err := os.Open(os.Args[1])
 	if err != nil {
 		log.Fatal(err)
@@ -40,12 +49,12 @@ func main() {
 			printToScreenAndFile(f, "=======================================================")
 		}
 
-		var detailResponse = getDetailResponse(gameData[0])
+		var detailResponse = getDetailResponse(gameData[0], config)
 		printDetailData(gameData[1], detailResponse.Response.Data.BoxDetails, f)
 
 		if gameData[1] == "buy" {
-			var storesResponse = getStoresResponse(gameData[0])
-			printStoreData(storesResponse.Response.Data.NearestStores, f)
+			var storesResponse = getStoresResponse(gameData[0], locations[0], config)
+			printStoreData(storesResponse.Response.Data.NearestStores, config, f)
 		}
 	}
 
@@ -74,20 +83,20 @@ func printDetailData(action string, details []ItemDetailResponse, f *os.File) {
 	}
 }
 
-func printStoreData(nearestStores []NearestStoresResponse, f *os.File) {
+func printStoreData(nearestStores []NearestStoresResponse, config Configuration, f *os.File) {
 	var found = false
 
 	printToScreenAndFile(f, "")
 
 	for _, store := range nearestStores {
-		if strings.Contains(store.StoreName, "Glasgow") {
+		if strings.Contains(store.StoreName, config.Stores.MatchName) {
 			printToScreenAndFile(f, fmt.Sprintf("    %s: %s", store.StoreName, getString(store.QuantityOnHand)))
 			found = true
 		}
 	}
 
 	if !found {
-		printToScreenAndFile(f, "    Not found in any Glasgow store.")
+		printToScreenAndFile(f, "    Not found in any store.")
 	}
 }
 

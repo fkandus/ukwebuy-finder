@@ -51,9 +51,7 @@ type ItemDetailResponse struct {
 	ExchangePrice float64
 }
 
-func getDetailResponse(gameID string) DetailResponse {
-	var config = getConfig()
-
+func getDetailResponse(gameID string, config Configuration) DetailResponse {
 	resp, err := http.Get(strings.Replace(config.Urls.Detail, "{gameID}", gameID, 1))
 	if err != nil {
 		panic(err)
@@ -71,10 +69,10 @@ func getDetailResponse(gameID string) DetailResponse {
 	return response
 }
 
-func getStoresResponse(gameID string) StoresResponse {
-	var config = getConfig()
+func getStoresResponse(gameID string, location Location, config Configuration) StoresResponse {
+	r := strings.NewReplacer("{gameID}", gameID, "{latitude}", location.Lat, "{longitude}", location.Lon)
 
-	resp, err := http.Get(strings.Replace(config.Urls.Store, "{gameID}", gameID, 1))
+	resp, err := http.Get(r.Replace(config.Urls.Store))
 	if err != nil {
 		panic(err)
 	}
