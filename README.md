@@ -2,8 +2,8 @@
 Queries CeX (uk.webuy.com) to find out availability and prices of games.
 
 ## How to run:
-1. `go build cex.go response.go`
-2. `cex short-game-ids.txt`
+1. Execute `go build cex.go response.go configuration.go`.
+2. Execute `cex short-game-ids.txt`
 
 This will write to a file `trade-games-YYYYMMDD-HHMMSS.txt` and to command line.
 

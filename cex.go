@@ -2,11 +2,8 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"strconv"
 	"strings"
@@ -59,50 +56,6 @@ func main() {
 	}
 
 	f.Sync()
-}
-
-func getDetailResponse(gameID string) DetailResponse {
-	resp, err := http.Get("https://wss2.cex.uk.webuy.io/v3/boxes/" + gameID + "/detail")
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	//printToScreenAndFile(fmt.Sprintf("HTTP Status: %d", resp.StatusCode))
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	//printToScreenAndFile(string(body))
-
-	var response DetailResponse
-	json.Unmarshal(body, &response)
-
-	return response
-}
-
-func getStoresResponse(gameID string) StoresResponse {
-	resp, err := http.Get("https://wss2.cex.uk.webuy.io/v3/boxes/" + gameID + "/neareststores?latitude=55.864237&longitude=-4.2518059")
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	//printToScreenAndFile(fmt.Sprintf("HTTP Status: %d", resp.StatusCode))
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	//printToScreenAndFile(string(body))
-
-	var response StoresResponse
-	json.Unmarshal(body, &response)
-
-	return response
 }
 
 func printDetailData(action string, details []ItemDetailResponse, f *os.File) {

@@ -1,5 +1,13 @@
 package main
 
+import (
+	"encoding/json"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"strings"
+)
+
 // StoresResponse represents the topmost level
 type StoresResponse struct {
 	Response CexStoresResponse
@@ -41,4 +49,44 @@ type ItemDetailResponse struct {
 	BoxName       string
 	SellPrice     float64
 	ExchangePrice float64
+}
+
+func getDetailResponse(gameID string) DetailResponse {
+	var config = getConfig()
+
+	resp, err := http.Get(strings.Replace(config.Urls.Detail, "{gameID}", gameID, 1))
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var response DetailResponse
+	json.Unmarshal(body, &response)
+
+	return response
+}
+
+func getStoresResponse(gameID string) StoresResponse {
+	var config = getConfig()
+
+	resp, err := http.Get(strings.Replace(config.Urls.Store, "{gameID}", gameID, 1))
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var response StoresResponse
+	json.Unmarshal(body, &response)
+
+	return response
 }

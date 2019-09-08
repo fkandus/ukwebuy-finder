@@ -1,0 +1,6 @@
+{
+    "urls": {
+        "detail" : "https://wss2.cex.uk.webuy.io/v3/boxes/{gameID}/detail",
+        "store" : "https://wss2.cex.uk.webuy.io/v3/boxes/{gameID}/neareststores?latitude=55.864237&longitude=-4.2518059"
+    }
+}
