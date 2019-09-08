@@ -73,10 +73,10 @@ func printDetailData(action string, details []ItemDetailResponse, f *os.File) {
 
 		switch action {
 		case "buy":
-			printToScreenAndFile(f, fmt.Sprintf("    Sell Price: %s", formatFloat(detail.SellPrice, 2)))
+			printToScreenAndFile(f, fmt.Sprintf("    Buy for: £%s", formatFloat(detail.SellPrice, 2)))
 			break
 		case "sell":
-			printToScreenAndFile(f, fmt.Sprintf("    Exchange Price: %s", formatFloat(detail.ExchangePrice, 2)))
+			printToScreenAndFile(f, fmt.Sprintf("    Sell at: £%s", formatFloat(detail.ExchangePrice, 2)))
 			break
 		}
 

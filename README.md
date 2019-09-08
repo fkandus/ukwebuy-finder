@@ -17,7 +17,7 @@ CSV of `GameID,Action` (See [short-game-ids.txt](https://github.com/fkandus/ukwe
 To get the GameID go to the URL of a game and look for the `id` parameter.
 For example, in `https://uk.webuy.com/product-detail?id=5026555423045&categoryName=playstation4-software&superCatName=gaming&title=red-dead-redemption-2-%282-disc%29-%28no-dlc%29` the Game ID is `5026555423045`.
 
-Action is `buy` or `sell`.
+Action is `buy` or `sell`. This is from the user standpoint ("user wants to buy/sell").
 
 ## Config File
 
@@ -32,17 +32,19 @@ Action is `buy` or `sell`.
 
 ## Output Example
 
+The following output shows `Red Dead Redemption 2` as an example of the `buy` action and `Uncharted: Golden Abyss` as an example of the `sell` action.
+
 ```
 -------------------------------------------------------
 Red Dead Redemption 2 (2 Disc) (No DLC)
-    Sell Price: 20.00
+    Buy for: £20.00
 
     Glasgow - Union Street: 4+
     Glasgow Sauchiehall: 4+
     Glasgow Forge: 4+
 =======================================================
 Uncharted: Golden Abyss
-    Exchange Price: 10.00
+    Sell at: £10.00
 =======================================================
 ```
 
