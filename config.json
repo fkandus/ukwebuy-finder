@@ -5,8 +5,7 @@
         "location" : "https://nominatim.openstreetmap.org/search?city={city}&format=json&country=United%20Kingdom"
     },
     "locations": {
-        "city": "Glasgow",
-        "country": "United Kingdom"
+        "city": "Glasgow"
     },
     "stores": {
         "matchName": "Glasgow"

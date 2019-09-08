@@ -19,7 +19,6 @@ CSV of Game ID,"buy" or "sell" action. See `short-game-ids.txt`.
   - `location`: API to get (lat, lon) from a City in the UK.
 - `locations`: Configuration to find (lat, lon).
   - `city`: City name to send to the Location API.
-  - `country`: Country name to send to the Location API. **Should not be changed.**
 - `stores`: Configuration for post-processing store data.
   - `matchName`: the store must match (contain) this string to be taken into account.
 
