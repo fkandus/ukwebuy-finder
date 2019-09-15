@@ -43,11 +43,7 @@ func main() {
 	for scanner.Scan() {
 		var gameData = strings.Split(scanner.Text(), ",")
 
-		if gameData[1] == "buy" {
-			printToScreenAndFile(f, "-------------------------------------------------------")
-		} else {
-			printToScreenAndFile(f, "=======================================================")
-		}
+		printSeparatorLine(f, gameData[1])
 
 		var detailResponse = getDetailResponse(gameData[0], config)
 		printDetailData(gameData[1], detailResponse.Response.Data.BoxDetails, f)
@@ -58,7 +54,7 @@ func main() {
 		}
 	}
 
-	printToScreenAndFile(f, "=======================================================")
+	printSeparatorLine(f, "sell")
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
@@ -69,7 +65,7 @@ func main() {
 
 func printDetailData(action string, details []ItemDetailResponse, f *os.File) {
 	for _, detail := range details {
-		printToScreenAndFile(f, detail.BoxName)
+		printToScreenAndFile(f, fmt.Sprintf("%s (%s)", detail.BoxName, detail.CategoryFriendlyName))
 
 		switch action {
 		case "buy":
@@ -113,6 +109,14 @@ func getString(v interface{}) string {
 
 func formatFloat(f float64, d int) string {
 	return strconv.FormatFloat(f, 'f', d, 64)
+}
+
+func printSeparatorLine(f *os.File, action string) {
+	if action == "buy" {
+		printToScreenAndFile(f, "--------------------------------------------------------------------------------")
+	} else if action == "sell" {
+		printToScreenAndFile(f, "================================================================================")
+	}
 }
 
 func printToScreenAndFile(f *os.File, message string) {

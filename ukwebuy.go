@@ -49,6 +49,7 @@ type ItemDetailResponse struct {
 	BoxName       string
 	SellPrice     float64
 	ExchangePrice float64
+	CategoryFriendlyName string
 }
 
 func getDetailResponse(gameID string, config Configuration) DetailResponse {

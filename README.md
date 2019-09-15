@@ -35,16 +35,16 @@ Action is `buy` or `sell`. This is from the user standpoint ("user wants to buy/
 The following output shows `Red Dead Redemption 2` as an example of the `buy` action and `Uncharted: Golden Abyss` as an example of the `sell` action.
 
 ```
--------------------------------------------------------
-Red Dead Redemption 2 (2 Disc) (No DLC)
-    Buy for: £20.00
+--------------------------------------------------------------------------------
+Red Dead Redemption 2 (2 Disc) (No DLC) (Playstation4 Games)
+    Buy for: £22.00
 
     Glasgow - Union Street: 4+
     Glasgow Sauchiehall: 4+
     Glasgow Forge: 4+
-=======================================================
-Uncharted: Golden Abyss
+================================================================================
+Uncharted: Golden Abyss (PS Vita Games)
     Sell at: £10.00
-=======================================================
+================================================================================
 ```
 
