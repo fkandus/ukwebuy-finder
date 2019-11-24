@@ -46,5 +46,7 @@ Red Dead Redemption 2 (2 Disc) (No DLC) (Playstation4 Games)
 Uncharted: Golden Abyss (PS Vita Games)
     Sell at: £10.00
 ================================================================================
+Total Buy Value: £22
+Total Sell Value: £10
 ```
 

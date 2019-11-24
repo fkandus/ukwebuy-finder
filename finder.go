@@ -39,6 +39,9 @@ func main() {
 	}
 	defer f.Close()
 
+	var totalBuy float64 = 0
+	var totalSell float64 = 0
+
 	scanner := bufio.NewScanner(input)
 	for scanner.Scan() {
 		var gameData = strings.Split(scanner.Text(), ",")
@@ -49,8 +52,13 @@ func main() {
 		printDetailData(gameData[1], detailResponse.Response.Data.BoxDetails, f)
 
 		if gameData[1] == "buy" {
+			totalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
 			var storesResponse = getStoresResponse(gameData[0], locations[0], config)
 			printStoreData(storesResponse.Response.Data.NearestStores, config, f)
+		}
+
+		if gameData[1] == "sell" {
+			totalSell += detailResponse.Response.Data.BoxDetails[0].ExchangePrice
 		}
 	}
 
@@ -61,6 +69,9 @@ func main() {
 	}
 
 	f.Sync()
+
+	printToScreenAndFile(f, fmt.Sprintf("Total Buy Value: £%s", formatFloat(totalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Total Sell Value: £%s", formatFloat(totalSell, 2)))
 }
 
 func printDetailData(action string, details []ItemDetailResponse, f *os.File) {
