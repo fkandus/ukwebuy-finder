@@ -72,6 +72,7 @@ func main() {
 
 	printToScreenAndFile(f, fmt.Sprintf("Total Buy Value: £%s", formatFloat(totalBuy, 2)))
 	printToScreenAndFile(f, fmt.Sprintf("Total Sell Value: £%s", formatFloat(totalSell, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference: £%s", formatFloat(totalSell-totalBuy, 2)))
 }
 
 func printDetailData(action string, details []ItemDetailResponse, f *os.File) {

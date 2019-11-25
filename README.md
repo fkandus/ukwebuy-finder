@@ -44,9 +44,10 @@ Red Dead Redemption 2 (2 Disc) (No DLC) (Playstation4 Games)
     Glasgow Forge: 4+
 ================================================================================
 Uncharted: Golden Abyss (PS Vita Games)
-    Sell at: £10.00
+    Sell at: £30.00
 ================================================================================
 Total Buy Value: £22
-Total Sell Value: £10
+Total Sell Value: £30
+Buy-Sell difference: £8
 ```
 
