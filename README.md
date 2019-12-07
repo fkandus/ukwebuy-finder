@@ -2,7 +2,7 @@
 Queries [CeX](https://uk.webuy.com/) to find out availability and prices of games.
 
 ## How to run:
-1. Execute `go build finder.go ukwebuy.go location.go configuration.go`.
+1. Execute `build.bat` (Windows) or `./build.sh` (Linux).
 2. Rename `config.json.example` to `config.json`.
 3. Set the values in `config.json` according to your own setup (Check the [Config file](#config-file) section).
 4. Create an input file (Check the [Input file](#input-file) section). Name it, for example, `input-file.txt`.
