@@ -52,9 +52,10 @@ func main() {
 		printDetailData(gameData[1], detailResponse.Response.Data.BoxDetails, f)
 
 		if gameData[1] == "buy" {
-			totalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
 			var storesResponse = getStoresResponse(gameData[0], locations[0], config)
-			printStoreData(storesResponse.Response.Data.NearestStores, config, f)
+			if handleStoreData(storesResponse.Response.Data.NearestStores, &totalBuy, config, f) {
+				totalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
+			}
 		}
 
 		if gameData[1] == "sell" {
@@ -91,7 +92,7 @@ func printDetailData(action string, details []ItemDetailResponse, f *os.File) {
 	}
 }
 
-func printStoreData(nearestStores []NearestStoresResponse, config Configuration, f *os.File) {
+func handleStoreData(nearestStores []NearestStoresResponse, totalBuy *float64, config Configuration, f *os.File) bool {
 	var found = false
 
 	printToScreenAndFile(f, "")
@@ -106,6 +107,8 @@ func printStoreData(nearestStores []NearestStoresResponse, config Configuration,
 	if !found {
 		printToScreenAndFile(f, "    Not found in any store.")
 	}
+
+	return found
 }
 
 func getString(v interface{}) string {
