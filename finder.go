@@ -39,6 +39,7 @@ func main() {
 	}
 	defer f.Close()
 
+	var availableTotalBuy float64 = 0
 	var totalBuy float64 = 0
 	var totalSell float64 = 0
 
@@ -49,13 +50,14 @@ func main() {
 		printSeparatorLine(f, gameData[1])
 
 		var detailResponse = getDetailResponse(gameData[0], config)
-		printDetailData(gameData[1], detailResponse.Response.Data.BoxDetails, f)
+		printDetailData(gameData, detailResponse.Response.Data.BoxDetails, f)
 
 		if gameData[1] == "buy" {
 			var storesResponse = getStoresResponse(gameData[0], locations[0], config)
 			if handleStoreData(storesResponse.Response.Data.NearestStores, &totalBuy, config, f) {
-				totalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
+				availableTotalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
 			}
+			totalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
 		}
 
 		if gameData[1] == "sell" {
@@ -71,14 +73,19 @@ func main() {
 
 	f.Sync()
 
-	printToScreenAndFile(f, fmt.Sprintf("Total Buy Value: £%s", formatFloat(totalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Available items total Buy Value: £%s", formatFloat(availableTotalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("All items total Buy Value: £%s", formatFloat(totalBuy, 2)))
 	printToScreenAndFile(f, fmt.Sprintf("Total Sell Value: £%s", formatFloat(totalSell, 2)))
-	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference: £%s", formatFloat(totalSell-totalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (available): £%s", formatFloat(totalSell-availableTotalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (total): £%s", formatFloat(totalSell-totalBuy, 2)))
 }
 
-func printDetailData(action string, details []ItemDetailResponse, f *os.File) {
+func printDetailData(gameData []string, details []ItemDetailResponse, f *os.File) {
+	var id = gameData[0]
+	var action = gameData[1]
+
 	for _, detail := range details {
-		printToScreenAndFile(f, fmt.Sprintf("%s (%s)", detail.BoxName, detail.CategoryFriendlyName))
+		printToScreenAndFile(f, fmt.Sprintf("%s (%s) - (%s)", detail.BoxName, detail.CategoryFriendlyName, id))
 
 		switch action {
 		case "buy":
@@ -128,9 +135,9 @@ func formatFloat(f float64, d int) string {
 
 func printSeparatorLine(f *os.File, action string) {
 	if action == "buy" {
-		printToScreenAndFile(f, "--------------------------------------------------------------------------------")
+		printToScreenAndFile(f, "------------------------------------------------------------------------------------------")
 	} else if action == "sell" {
-		printToScreenAndFile(f, "================================================================================")
+		printToScreenAndFile(f, "==========================================================================================")
 	}
 }
 

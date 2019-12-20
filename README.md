@@ -36,18 +36,25 @@ The following output shows `Red Dead Redemption 2` as an example of the `buy` ac
 
 ```
 --------------------------------------------------------------------------------
-Red Dead Redemption 2 (2 Disc) (No DLC) (Playstation4 Games)
+Red Dead Redemption 2 (2 Disc) (No DLC) (Playstation4 Games) - (111719174486)
     Buy for: £22.00
 
     Glasgow - Union Street: 4+
     Glasgow Sauchiehall: 4+
     Glasgow Forge: 4+
+--------------------------------------------------------------------------------
+Infamous: First Light (Playstation4 Games) - (711719838814)
+    Buy for: £8.00
+
+    Not found in any store.
 ================================================================================
-Uncharted: Golden Abyss (PS Vita Games)
+Uncharted: Golden Abyss (PS Vita Games) - (21171922sb02)
     Sell at: £30.00
 ================================================================================
-Total Buy Value: £22
-Total Sell Value: £30
-Buy-Sell difference: £8
+Available items total Buy Value: £22.00
+All items total Buy Value: £30.00
+Total Sell Value: £30.00
+Buy-Sell difference (available): £8.00
+Buy-Sell difference (total): £0.00
 ```
 
