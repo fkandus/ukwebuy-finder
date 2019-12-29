@@ -32,12 +32,12 @@ Action is `buy` or `sell`. This is from the user standpoint ("user wants to buy/
 
 ## Output Example
 
-The following output shows `Red Dead Redemption 2` as an example of the `buy` action and `Uncharted: Golden Abyss` as an example of the `sell` action.
+In the following output `Red Dead Redemption 2`, `Infamous: First Light` and `Infamous 2` are examples of the `buy` action. `Uncharted: Golden Abyss` is an example of the `sell` action.
 
 ```
 --------------------------------------------------------------------------------
 Red Dead Redemption 2 (2 Disc) (No DLC) (Playstation4 Games) - (111719174486)
-    Buy for: £22.00
+    Buy for: £20.00
 
     Glasgow - Union Street: 4+
     Glasgow Sauchiehall: 4+
@@ -47,6 +47,11 @@ Infamous: First Light (Playstation4 Games) - (711719838814)
     Buy for: £8.00
 
     Not found in any store.
+--------------------------------------------------------------------------------
+Infamous 2 (Playstation3 Games) - (711719174486)
+    Buy for: £2.00
+
+    Glasgow - Union Street: 1
 ================================================================================
 Uncharted: Golden Abyss (PS Vita Games) - (21171922sb02)
     Sell at: £30.00
@@ -56,5 +61,10 @@ All items total Buy Value: £30.00
 Total Sell Value: £30.00
 Buy-Sell difference (available): £8.00
 Buy-Sell difference (total): £0.00
+================================================================================
+Store counter:
+Glasgow - Union Street: 2
+Glasgow Sauchiehall: 1
+Glasgow Forge: 1
 ```
 

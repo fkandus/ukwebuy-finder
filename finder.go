@@ -42,6 +42,7 @@ func main() {
 	var availableTotalBuy float64 = 0
 	var totalBuy float64 = 0
 	var totalSell float64 = 0
+	var storeCount = make(map[string]int)
 
 	scanner := bufio.NewScanner(input)
 	for scanner.Scan() {
@@ -54,7 +55,7 @@ func main() {
 
 		if gameData[1] == "buy" {
 			var storesResponse = getStoresResponse(gameData[0], locations[0], config)
-			if handleStoreData(storesResponse.Response.Data.NearestStores, &totalBuy, config, f) {
+			if processStores(storesResponse, config, storeCount, f) {
 				availableTotalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
 			}
 			totalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
@@ -78,6 +79,10 @@ func main() {
 	printToScreenAndFile(f, fmt.Sprintf("Total Sell Value: £%s", formatFloat(totalSell, 2)))
 	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (available): £%s", formatFloat(totalSell-availableTotalBuy, 2)))
 	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (total): £%s", formatFloat(totalSell-totalBuy, 2)))
+
+	printSeparatorLine(f, "sell")
+
+	printStoreCount(storeCount, f)
 }
 
 func printDetailData(gameData []string, details []ItemDetailResponse, f *os.File) {
@@ -99,23 +104,53 @@ func printDetailData(gameData []string, details []ItemDetailResponse, f *os.File
 	}
 }
 
-func handleStoreData(nearestStores []NearestStoresResponse, totalBuy *float64, config Configuration, f *os.File) bool {
-	var found = false
+func processStores(storesResponse StoresResponse, config Configuration, storeCount map[string]int, f *os.File) bool {
+	var stores = filterStores(storesResponse.Response.Data.NearestStores, config)
 
-	printToScreenAndFile(f, "")
+	if len(stores) > 0 {
+		handleStores(stores, storeCount, f)
+
+		return true
+	} else {
+		printToScreenAndFile(f, "    Not found in any store.")
+
+		return false
+	}
+}
+
+func filterStores(nearestStores []NearestStoresResponse, config Configuration) []NearestStoresResponse {
+	var filteredStores []NearestStoresResponse
 
 	for _, store := range nearestStores {
 		if strings.Contains(store.StoreName, config.Stores.MatchName) {
-			printToScreenAndFile(f, fmt.Sprintf("    %s: %s", store.StoreName, getString(store.QuantityOnHand)))
-			found = true
+			filteredStores = append(filteredStores, store)
 		}
 	}
 
-	if !found {
-		printToScreenAndFile(f, "    Not found in any store.")
-	}
+	return filteredStores
+}
 
-	return found
+func handleStores(stores []NearestStoresResponse, storeCount map[string]int, f *os.File) {
+	printToScreenAndFile(f, "")
+
+	for _, store := range stores {
+		printToScreenAndFile(f, fmt.Sprintf("    %s: %s", store.StoreName, getString(store.QuantityOnHand)))
+		_, ok := storeCount[store.StoreName]
+
+		if ok {
+			storeCount[store.StoreName]++
+		} else {
+			storeCount[store.StoreName] = 1
+		}
+	}
+}
+
+func printStoreCount(storeCount map[string]int, f *os.File) {
+	printToScreenAndFile(f, "Store counter:")
+
+	for key, value := range storeCount {
+		printToScreenAndFile(f, fmt.Sprint(key, ": ", value))
+	}
 }
 
 func getString(v interface{}) string {
