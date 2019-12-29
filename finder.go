@@ -111,11 +111,11 @@ func processStores(storesResponse StoresResponse, config Configuration, storeCou
 		handleStores(stores, storeCount, f)
 
 		return true
-	} else {
-		printToScreenAndFile(f, "    Not found in any store.")
-
-		return false
 	}
+
+	printToScreenAndFile(f, "    Not found in any store.")
+
+	return false
 }
 
 func filterStores(nearestStores []NearestStoresResponse, config Configuration) []NearestStoresResponse {
