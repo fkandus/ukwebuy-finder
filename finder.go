@@ -54,8 +54,8 @@ func main() {
 		printDetailData(gameData, detailResponse.Response.Data.BoxDetails, f)
 
 		if gameData[1] == "buy" {
-			var storesResponse = getStoresResponse(gameData[0], locations[0], config)
-			if processStores(storesResponse, config, storeCount, f) {
+			var storesResponses = getStoresResponse(gameData[0], locations, config)
+			if processStores(storesResponses, config, storeCount, f) {
 				availableTotalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
 			}
 			totalBuy += detailResponse.Response.Data.BoxDetails[0].SellPrice
@@ -104,8 +104,8 @@ func printDetailData(gameData []string, details []ItemDetailResponse, f *os.File
 	}
 }
 
-func processStores(storesResponse StoresResponse, config Configuration, storeCount map[string]int, f *os.File) bool {
-	var stores = filterStores(storesResponse.Response.Data.NearestStores, config)
+func processStores(storeResponses []StoresResponse, config Configuration, storeCount map[string]int, f *os.File) bool {
+	var stores = filterStores(storeResponses, config)
 
 	if len(stores) > 0 {
 		handleStores(stores, storeCount, f)
@@ -118,16 +118,28 @@ func processStores(storesResponse StoresResponse, config Configuration, storeCou
 	return false
 }
 
-func filterStores(nearestStores []NearestStoresResponse, config Configuration) []NearestStoresResponse {
+func filterStores(storeResponses []StoresResponse, config Configuration) []NearestStoresResponse {
 	var filteredStores []NearestStoresResponse
 
-	for _, store := range nearestStores {
-		if strings.Contains(store.StoreName, config.Stores.MatchName) {
-			filteredStores = append(filteredStores, store)
+	for _, storeResponse := range storeResponses {
+		for _, store := range storeResponse.Response.Data.NearestStores {
+			if matchStore(store.StoreName, config.Stores.MatchName) {
+				filteredStores = append(filteredStores, store)
+			}
 		}
 	}
 
 	return filteredStores
+}
+
+func matchStore(storeName string, matchNames []string) bool {
+	for _, matchName := range matchNames {
+		if strings.Contains(storeName, matchName) {
+			return true
+		}
+	}
+
+	return false
 }
 
 func handleStores(stores []NearestStoresResponse, storeCount map[string]int, f *os.File) {

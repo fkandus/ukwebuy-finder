@@ -26,9 +26,13 @@ Action is `buy` or `sell`. This is from the user standpoint ("user wants to buy/
   - `store`: API to get store availability for a game based on lat and lon.
   - `location`: API to get (lat, lon) from a City in the UK.
 - `locations`: Configuration to find (lat, lon).
-  - `city`: City name to send to the Location API.
+  - `city`: City names to send to the Location API.
 - `stores`: Configuration for post-processing store data.
-  - `matchName`: the store must match (contain) this string to be taken into account.
+  - `matchName`: the store must match (contain) any of these strings to be taken into account.
+
+## Cache
+
+The command will try to store the coordinates of the config cities in a text file to use as cache. The user executing must have the permissions to write in the folder where the executable is.
 
 ## Output Example
 

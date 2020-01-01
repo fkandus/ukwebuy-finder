@@ -13,4 +13,5 @@
 
 trade-games-*
 game-ids.txt
+location_cache.txt
 config.json

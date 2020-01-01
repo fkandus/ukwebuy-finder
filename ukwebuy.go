@@ -46,9 +46,9 @@ type DetailDataResponse struct {
 
 // ItemDetailResponse represents the important data of a store
 type ItemDetailResponse struct {
-	BoxName       string
-	SellPrice     float64
-	ExchangePrice float64
+	BoxName              string
+	SellPrice            float64
+	ExchangePrice        float64
 	CategoryFriendlyName string
 }
 
@@ -70,22 +70,28 @@ func getDetailResponse(gameID string, config Configuration) DetailResponse {
 	return response
 }
 
-func getStoresResponse(gameID string, location Location, config Configuration) StoresResponse {
-	r := strings.NewReplacer("{gameID}", gameID, "{latitude}", location.Lat, "{longitude}", location.Lon)
+func getStoresResponse(gameID string, locations []Location, config Configuration) []StoresResponse {
+	var storeResponses []StoresResponse
 
-	resp, err := http.Get(r.Replace(config.Urls.Store))
-	if err != nil {
-		panic(err)
+	for _, loc := range locations {
+		r := strings.NewReplacer("{gameID}", gameID, "{latitude}", loc.Lat, "{longitude}", loc.Lon)
+
+		resp, err := http.Get(r.Replace(config.Urls.Store))
+		if err != nil {
+			panic(err)
+		}
+		defer resp.Body.Close()
+
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		var response StoresResponse
+		json.Unmarshal(body, &response)
+
+		storeResponses = append(storeResponses, response)
 	}
-	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	var response StoresResponse
-	json.Unmarshal(body, &response)
-
-	return response
+	return storeResponses
 }
