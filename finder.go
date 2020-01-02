@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -160,9 +161,22 @@ func handleStores(stores []NearestStoresResponse, storeCount map[string]int, f *
 func printStoreCount(storeCount map[string]int, f *os.File) {
 	printToScreenAndFile(f, "Store counter:")
 
-	for key, value := range storeCount {
-		printToScreenAndFile(f, fmt.Sprint(key, ": ", value))
+	keys := sortedKeys(storeCount)
+
+	for _, k := range keys {
+		printToScreenAndFile(f, fmt.Sprint(k, ": ", storeCount[k]))
 	}
+}
+
+func sortedKeys(m map[string]int) []string {
+	keys := make([]string, len(m))
+	i := 0
+	for k := range m {
+		keys[i] = k
+		i++
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 func getString(v interface{}) string {
