@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path"
 	"sort"
 	"strconv"
 	"strings"
@@ -26,15 +27,19 @@ func main() {
 		return
 	}
 
-	input, err := os.Open(os.Args[1])
+	var inputFile = os.Args[1]
+
+	input, err := os.Open(inputFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer input.Close()
 
+	inputBasename := strings.TrimSuffix(inputFile, path.Ext(inputFile))
+
 	dt := time.Now()
 
-	f, err := os.Create("trade-games-" + dt.Format("20060102-150405") + ".txt")
+	f, err := os.Create("result-" + inputBasename + "-" + dt.Format("20060102-150405") + ".txt")
 	if err != nil {
 		panic(err)
 	}

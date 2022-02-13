@@ -8,11 +8,11 @@ Queries [CeX](https://uk.webuy.com/) to find out availability and prices of game
 4. Create an input file (Check the [Input file](#input-file) section). Name it, for example, `input-file.txt`.
 5. Execute `finder input-file.txt`
 
-This will write to a file `trade-games-YYYYMMDD-HHMMSS.txt` and to command line.
+This will write to a file `result-input-file-YYYYMMDD-HHMMSS.txt` and to command line.
 
 ## Input File
 
-CSV of `GameID,Action` (See [short-game-ids.txt](https://github.com/fkandus/ukwebuy-finder/blob/master/short-game-ids.txt)).
+CSV of `GameID,Action` (See [game-list.txt.example](https://github.com/fkandus/ukwebuy-finder/blob/master/game-list.txt.example)).
 
 To get the GameID go to the URL of a game and look for the `id` parameter.
 For example, in `https://uk.webuy.com/product-detail?id=5026555423045&categoryName=playstation4-software&superCatName=gaming&title=red-dead-redemption-2-%282-disc%29-%28no-dlc%29` the Game ID is `5026555423045`.
@@ -71,4 +71,3 @@ Glasgow - Union Street: 2
 Glasgow Sauchiehall: 1
 Glasgow Forge: 1
 ```
-

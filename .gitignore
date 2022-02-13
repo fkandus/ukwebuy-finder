@@ -13,6 +13,8 @@
 
 trade-games-*
 game-ids*.txt
+game-list*.txt
+result-*.txt
 location_cache.txt
 config.json
 finder
