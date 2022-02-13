@@ -39,7 +39,7 @@ func main() {
 
 	dt := time.Now()
 
-	f, err := os.Create("result-" + inputBasename + "-" + dt.Format("20060102-150405") + ".txt")
+	f, err := os.Create("result-" + inputBasename + "--" + dt.Format("20060102-150405") + ".txt")
 	if err != nil {
 		panic(err)
 	}
