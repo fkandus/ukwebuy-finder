@@ -57,7 +57,7 @@ func main() {
 		printSeparatorLine(f, gameData[1])
 
 		var detailResponse = getDetailResponse(gameData[0], config)
-		printDetailData(gameData, detailResponse.Response.Data.BoxDetails, f)
+		printDetailData(gameData, detailResponse.Response.Data.BoxDetails, config, f)
 
 		if gameData[1] == "buy" {
 			var storesResponses = getStoresResponse(gameData[0], locations, config)
@@ -80,18 +80,18 @@ func main() {
 
 	f.Sync()
 
-	printToScreenAndFile(f, fmt.Sprintf("Available items total Buy Value: £%s", formatFloat(availableTotalBuy, 2)))
-	printToScreenAndFile(f, fmt.Sprintf("All items total Buy Value: £%s", formatFloat(totalBuy, 2)))
-	printToScreenAndFile(f, fmt.Sprintf("Total Sell Value: £%s", formatFloat(totalSell, 2)))
-	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (available): £%s", formatFloat(totalSell-availableTotalBuy, 2)))
-	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (total): £%s", formatFloat(totalSell-totalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Available items total Buy Value: %s%s", config.Currency.Symbol, formatFloat(availableTotalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("All items total Buy Value: %s%s", config.Currency.Symbol, formatFloat(totalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Total Sell Value: %s%s", config.Currency.Symbol, formatFloat(totalSell, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (available): %s%s", config.Currency.Symbol, formatFloat(totalSell-availableTotalBuy, 2)))
+	printToScreenAndFile(f, fmt.Sprintf("Buy-Sell difference (total): %s%s", config.Currency.Symbol, formatFloat(totalSell-totalBuy, 2)))
 
 	printSeparatorLine(f, "sell")
 
 	printStoreCount(storeCount, f)
 }
 
-func printDetailData(gameData []string, details []ItemDetailResponse, f *os.File) {
+func printDetailData(gameData []string, details []ItemDetailResponse, config Configuration, f *os.File) {
 	var id = gameData[0]
 	var action = gameData[1]
 
@@ -100,10 +100,10 @@ func printDetailData(gameData []string, details []ItemDetailResponse, f *os.File
 
 		switch action {
 		case "buy":
-			printToScreenAndFile(f, fmt.Sprintf("    Buy for: £%s", formatFloat(detail.SellPrice, 2)))
+			printToScreenAndFile(f, fmt.Sprintf("    Buy for: %s%s", config.Currency.Symbol, formatFloat(detail.SellPrice, 2)))
 			break
 		case "sell":
-			printToScreenAndFile(f, fmt.Sprintf("    Sell at: £%s", formatFloat(detail.ExchangePrice, 2)))
+			printToScreenAndFile(f, fmt.Sprintf("    Sell at: %s%s", config.Currency.Symbol, formatFloat(detail.ExchangePrice, 2)))
 			break
 		}
 

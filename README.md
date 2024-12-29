@@ -1,7 +1,9 @@
 # ukwebuy-finder
+
 Queries [CeX](https://uk.webuy.com/) to find out availability and prices of games.
 
 ## How to run:
+
 1. Execute `build.bat` (Windows) or `./build.sh` (Linux).
 2. Rename `config.json.example` to `config.json`.
 3. Set the values in `config.json` according to your own setup (Check the [Config file](#config-file) section).
@@ -21,14 +23,16 @@ Action is `buy` or `sell`. This is from the user standpoint ("user wants to buy/
 
 ## Config File
 
-- `urls`: API Urls to get different type of information. **Should not be changed.**
-  - `detail`: API to get details of game.
-  - `store`: API to get store availability for a game based on lat and lon.
-  - `location`: API to get (lat, lon) from a City in the UK.
-- `locations`: Configuration to find (lat, lon).
-  - `city`: City names to send to the Location API.
-- `stores`: Configuration for post-processing store data.
-  - `matchName`: the store must match (contain) any of these strings to be taken into account.
+-   `urls`: API Urls to get different type of information. **Should not be changed.**
+    -   `detail`: API to get details of game.
+    -   `store`: API to get store availability for a game based on lat and lon.
+    -   `location`: API to get (lat, lon) from a City in the UK.
+-   `locations`: Configuration to find (lat, lon).
+    -   `city`: City names to send to the Location API.
+-   `stores`: Configuration for post-processing store data.
+    -   `matchName`: the store must match (contain) any of these strings to be taken into account.
+-   `currency`: Configuration for money.
+    -   `symbol`: currency symbol that will be shown in the output.
 
 ## Cache
 

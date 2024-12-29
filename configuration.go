@@ -11,12 +11,13 @@ type Configuration struct {
 	Urls      URLData
 	Locations LocationData
 	Stores    StoreData
+	Currency  CurrencyData
 }
 
 // URLData contains the needed URLs
 type URLData struct {
-	Detail string
-	Store  string
+	Detail   string
+	Store    string
 	Location string
 }
 
@@ -29,6 +30,10 @@ type LocationData struct {
 // StoreData contains the names of stores to match
 type StoreData struct {
 	MatchName []string
+}
+
+type CurrencyData struct {
+	Symbol string
 }
 
 func getConfig() Configuration {

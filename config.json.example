@@ -9,5 +9,8 @@
     },
     "stores": {
         "matchName": ["Glasgow", "London W1"]
+    },
+    "currency": {
+        "symbol": ""
     }
 }
